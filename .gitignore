@@ -1,4 +1,5 @@
 .idea/
+yolov4.weights
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
