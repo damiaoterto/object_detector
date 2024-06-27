@@ -37,14 +37,20 @@ def resizing(image, max_width=600):
     return cv2.resize(image, (image.shape[1], image.shape[0]))
 
 
-def start_processing(img):
-    net = cv2.dnn.readNetFromDarknet(CONFIG_PATH, WEIGHT_PATH)
+def get_out_layers(net):
     layer_names = net.getLayerNames()
     out_layers_index = net.getUnconnectedOutLayers()
     out_layer_names = []
 
     for index in out_layers_index:
         out_layer_names.append(layer_names[index - 1])
+        
+    return out_layer_names
+
+
+def start_processing(img):
+    net = cv2.dnn.readNetFromDarknet(CONFIG_PATH, WEIGHT_PATH)
+    out_layer_names = get_out_layers(net)
 
     image = cv2.imread(img)
     # image_cp = image.copy()
@@ -59,16 +65,16 @@ def start_processing(img):
     threshold = 0.5
     threshold_nms = 0.3
     boxes = []
-    confidence = []
+    confidences = []
     classes_id = []
 
     for output in layer_outputs:
         for detection in output:
             scores = detection[5:]
             class_id = np.argmax(scores)
-            confidences = scores[class_id]
+            confidence = scores[class_id]
 
-            if confidences > threshold:
+            if confidence > threshold:
                 box = detection[0:4] * np.array([w, h, w, h])
                 (center_x, center_y, width, height) = box.astype("int")
 
@@ -76,10 +82,10 @@ def start_processing(img):
                 y = int(center_y - (height / 2))
 
                 boxes.append([x, y, int(width), int(height)])
-                confidence.append(float(confidences))
+                confidences.append(float(confidence))
                 classes_id.append(class_id)
 
-    objects = cv2.dnn.NMSBoxes(boxes, confidence, threshold, threshold_nms)
+    objects = cv2.dnn.NMSBoxes(boxes, confidences, threshold, threshold_nms)
 
     if len(objects) > 0:
         for i in objects:
@@ -90,7 +96,7 @@ def start_processing(img):
             color = [int(c) for c in gen_rand_color()[classes_id[i]]]
 
             cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
-            text = "{}: {:.4f}".format(load_labels()[classes_id[i]], confidence[i])
+            text = "{}: {:.4f}".format(load_labels()[classes_id[i]], confidences[i])
             cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
     show_image(image)
