@@ -21,14 +21,19 @@ To install the dependencies and set up the virtual environment, follow the steps
     cd yolov4-object-detection
     ```
 
-2. Use `pipenv` to create and activate the virtual environment:
+2. Download yolov4 weights on project path:
+    ```sh
+    wget https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.weights
+    ```
+
+3. Use `pipenv` to create and activate the virtual environment:
 
     ```sh
     pipenv install
     pipenv shell
     ```
 
-3. Install the dependencies listed in the `requirements.txt` file:
+4. Install the dependencies listed in the `requirements.txt` file:
 
     ```sh
     pip install -r requirements.txt
