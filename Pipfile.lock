@@ -1,12 +1,12 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "5ce89eeb89870f675f851af1b4bea28b7f5369528e3af2fb35e87d38b0ff3bca"
+            "sha256": "97508d3390c2a1ce99a71f2fa651baf0588a3e0b0b5dd36c97edf1c0d5b8a2d6"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_full_version": "3.9.6",
-            "python_version": "3.9"
+            "python_full_version": "3.12.3",
+            "python_version": "3.12"
         },
         "sources": [
             {
@@ -122,14 +122,6 @@
             ],
             "markers": "python_version >= '3.8'",
             "version": "==4.53.0"
-        },
-        "importlib-resources": {
-            "hashes": [
-                "sha256:50d10f043df931902d4194ea07ec57960f66a80449ff867bfe782b4c486ba78c",
-                "sha256:cdb2b453b8046ca4e3798eb1d84f3cce1446a0e8e7b5ef4efb600f19fc398145"
-            ],
-            "markers": "python_version < '3.10'",
-            "version": "==6.4.0"
         },
         "kiwisolver": {
             "hashes": [
@@ -449,14 +441,6 @@
             ],
             "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
             "version": "==1.16.0"
-        },
-        "zipp": {
-            "hashes": [
-                "sha256:bf1dcf6450f873a13e952a29504887c89e6de7506209e5b1bcc3460135d4de19",
-                "sha256:f091755f667055f2d02b32c53771a7a6c8b47e1fdbc4b72a8b9072b3eef8015c"
-            ],
-            "markers": "python_version < '3.10'",
-            "version": "==3.19.2"
         }
     },
     "develop": {}
