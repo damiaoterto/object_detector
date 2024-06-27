@@ -26,6 +26,17 @@ def show_image(image):
     plt.show()
 
 
+def resizing(image, max_width=600):
+    if image.shape[1] > max_width:
+        proportion = image.shape[1] / image.shape[0]
+        image_width = max_width
+        image_height = int(image_width / proportion)
+
+        return cv2.resize(image, (image_width, image_height))
+
+    return cv2.resize(image, (image.shape[1], image.shape[0]))
+
+
 def start_processing(img):
     net = cv2.dnn.readNetFromDarknet(CONFIG_PATH, WEIGHT_PATH)
     layer_names = net.getLayerNames()
